@@ -1,4 +1,5 @@
 ﻿$.ajaxSetup({
+    cache: false,
     dataType: "json",
     complete:
         function (req, state) {
