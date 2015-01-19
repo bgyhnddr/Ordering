@@ -8,7 +8,7 @@
                 if (form) {
                     var redict = form.action;
                     if (redict.indexOf("Login.aspx") > 0) {
-                        window.location = window.location.origin + "/Login.aspx";
+                        window.location = window.location.origin + "/Ordering/Login.aspx";
                     }
 
                 }
