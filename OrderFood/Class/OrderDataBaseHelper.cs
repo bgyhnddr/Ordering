@@ -93,16 +93,16 @@ namespace OrderFood
             var dataSet = new DataSet();
             if (type != null)
             {
-                dataSet.Tables.Add(ExecSqlDataTable("SELECT * FROM [orderfood].[dbo].[OrderListView] WHERE [Type]=? AND CONVERT(CHAR(10),[Date],120) = CONVERT(CHAR(10),GETDATE(),120)",
+                dataSet.Tables.Add(ExecSqlDataTable("SELECT * FROM [orderfood].[dbo].[OrderListView] WHERE [Type]=? ORDER BY Store",
                         new CParam() { name = "Type", value = type }
                         ));
-                dataSet.Tables.Add(ExecSqlDataTable("SELECT * FROM [orderfood].[dbo].[SumReport] WHERE [Type]=?",
+                dataSet.Tables.Add(ExecSqlDataTable("SELECT * FROM [orderfood].[dbo].[SumReport] WHERE [Type]=? ORDER BY Store",
                         new CParam() { name = "Type", value = type }
                         ));
             }
             else
             {
-                dataSet.Tables.Add(ExecSqlDataTable("SELECT * FROM [orderfood].[dbo].[OrderListView] WHERE CONVERT(CHAR(10),[Date],120) = CONVERT(CHAR(10),GETDATE(),120)"));
+                dataSet.Tables.Add(ExecSqlDataTable("SELECT * FROM [orderfood].[dbo].[OrderListView] ORDER BY Store"));
                 dataSet.Tables.Add(ExecSqlDataTable("SELECT * FROM [orderfood].[dbo].[SumReport]"));
             }
             return dataSet;

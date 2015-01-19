@@ -1,11 +1,10 @@
 ﻿$(function () {
-    if (!main.IsPC())
-    {
+    if (!main.IsPC()) {
         $("body").addClass("phone");
     }
 
     $("#userInfo").html("系统载入中");
-    
+
     order.getCurrentUser(function (data) {
         order.currentUser = data[0].Account;
         order.auth = data[0].auth;
@@ -88,7 +87,7 @@ var main = {
     buildOrderList: function (table, data) {
         table.gridTable({
             fk: "id",
-            columns: ["id", "名称", "餐类", "店编号", "餐名", "价格", "已付", "找零", "点餐时间", "备注"],
+            columns: ["id", "序号", "名称", "餐类", "店编号", "餐名", "价格", "已付", "找零", "点餐时间", "备注"],
             showfk: false,
             dataSource: data,
             rowInsertCallback: function (tr, row) {
