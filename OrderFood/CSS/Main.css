@@ -1,0 +1,123 @@
+﻿body {
+    background: rgb(140, 140, 127);
+    font-family: "黑体";
+}
+
+#order {
+    position: relative;
+}
+
+    #order table {
+        font-family: "黑体";
+        font-size: 25px;
+    }
+
+        #order table > thead > tr {
+            background: #8BDCFF;
+        }
+
+        #order table > tbody > tr {
+            background: #8BDCFF;
+        }
+
+            #order table > tbody > tr > td.clickable {
+                cursor: pointer;
+                transition: all .3s;
+            }
+
+                #order table > tbody > tr > td.clickable:hover {
+                    background: rgb(150, 255, 213);
+                }
+
+        #order table.sumList {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+body.phone #order table.sumList {
+    position: relative;
+}
+
+button {
+    border-radius: 5px;
+    background-color: #ea4c88;
+    color: #eee;
+    margin-bottom: 2em;
+    text-transform: uppercase;
+    min-width: 100px;
+    border: none;
+    height: 50px;
+    font-family: "黑体";
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: .2em;
+    transition: all .3s;
+}
+
+    button:active {
+        transform: scale(0.9);
+    }
+
+    button.logout {
+        float: right;
+    }
+
+#menu > div.type {
+    overflow: hidden;
+}
+
+#menu > div.type {
+    background: #AEAEAE;
+    margin-bottom: 10px;
+}
+
+    #menu > div.type > div {
+        color: white;
+        background: #453E42;
+        float: left;
+        transition: all .3s;
+        margin-left: 5px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        font-size: 25px;
+        padding: 4px;
+    }
+
+        #menu > div.type > div:hover {
+            transform: scale(1.1);
+            background-color: yellowgreen;
+        }
+
+        #menu > div.type > div:active {
+            transform: scale(1);
+        }
+
+#filter {
+    font-size: 20px;
+}
+
+    #filter > span {
+        background-color: #363b41;
+        border-radius: 3px 0px 0px 3px;
+        color: white;
+        display: block;
+        float: left;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        width: 50px;
+    }
+
+    #filter > input {
+        background-color: #3b4148;
+        border-radius: 0px 3px 3px 0px;
+        color: white;
+        margin-bottom: 1em;
+        padding: 0 10px;
+        width: 230px;
+        height: 50px;
+        border: none;
+        font-size: 20px;
+        font-family: "黑体";
+    }
