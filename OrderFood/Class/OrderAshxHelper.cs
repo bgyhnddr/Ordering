@@ -10,14 +10,16 @@ namespace OrderFood
 {
     public class OrderAshxHelper
     {
-        public static string GetUserInfo(string name)
+        public static string GetUserInfo(string name, string url = "")
         {
             var table = new DataTable();
             table.Columns.Add("Account", typeof(string));
+            table.Columns.Add("url", typeof(string));
             table.Columns.Add("auth", typeof(int));
             var row = table.NewRow();
             row["Account"] = name;
             row["auth"] = OrderGlobalHelper.GetAuth(name);
+            row["url"] = url;
             table.Rows.Add(row);
             return ResponseJsonHelper.GetResponseString(true, string.Empty, ResponseJsonHelper.GetJSONString(table));
         }

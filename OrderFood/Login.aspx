@@ -6,7 +6,8 @@
 <head runat="server">
     <title></title>
     <script type="text/javascript" src="JS/core/jquery.js"></script>
-    <style type="text/css">
+    <link href="CSS/Form.css" rel="stylesheet" />
+<%--    <style type="text/css">
         * {
             margin: 0px;
             padding: 0px;
@@ -223,9 +224,9 @@
             line-height: 38px;
             font-size: 13px;
         }
-    </style>
+    </style>--%>
 </head>
-<body>
+<body class="form">
     <form id="mainlogin" runat="server">
         <div>
             <p>

@@ -16,7 +16,7 @@ namespace OrderFood.ASHX
         {
             try
             {
-                context.Response.Write(OrderAshxHelper.GetUserInfo(context.User.Identity.Name));
+                context.Response.Write(OrderAshxHelper.GetUserInfo(context.User.Identity.Name, context.Request.Cookies["url"] != null ? context.Request.Cookies["url"].Value : string.Empty));
             }
             catch (Exception ex)
             {

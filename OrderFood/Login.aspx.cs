@@ -22,10 +22,13 @@ namespace OrderFood
             var code = Request.Params["code"];
             if (code != null)
             {
-                var name = GetUserInfo(code);
-                if (!string.IsNullOrWhiteSpace(name))
+                var info = GetUserInfo(code);
+                if (info["name"] != null)
                 {
-                    FormsAuthentication.SetAuthCookie(name, true);
+                    FormsAuthentication.SetAuthCookie(info["name"].ToString(), true);
+                    var imgUrl = info["avatar"] != null ? info["avatar"].ToString() : string.Empty;
+                    HttpCookie cookie = new HttpCookie("url", imgUrl);     //实例化HttpCookie类并添加值
+                    Response.Cookies.Add(cookie);
                     Response.Redirect("Main.html");
                     return;
                 }
@@ -44,16 +47,16 @@ namespace OrderFood
             Response.Redirect(redirect);
         }
 
-        private string GetUserInfo(string code)
+        private JObject GetUserInfo(string code)
         {
             var json = JsonConvert.DeserializeObject<JObject>(OrderHelper.GetUserInofByCode(code));
             if (json["name"] != null)
             {
-                return json["name"].ToString();
+                return json;
             }
             else
             {
-                return string.Empty;
+                return new JObject();
             }
         }
 
@@ -88,6 +91,7 @@ namespace OrderFood
                 if (dt.Rows[0]["Password"].ToString() == FormsAuthentication.HashPasswordForStoringInConfigFile(PasswordInput.Text, "MD5"))
                 {
                     FormsAuthentication.SetAuthCookie(dt.Rows[0]["Account"].ToString(), true);
+                    Session[dt.Rows[0]["Account"].ToString()] = string.Empty;
                     Response.Redirect("Main.html");
                 }
                 else

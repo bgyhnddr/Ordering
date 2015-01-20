@@ -6,9 +6,8 @@
     $("#userInfo").html("系统载入中");
 
     order.getCurrentUser(function (data) {
-        order.currentUser = data[0].Account;
-        order.auth = data[0].auth;
-        main.buildTopBar(order.currentUser, order.auth);
+        order.currentUser = data[0];
+        main.buildTopBar(order.currentUser);
         main.refreshOrderList();
 
     }, function (err) {
@@ -69,16 +68,23 @@ var main = {
     buildUploadButton: function () {
         new CFileUpload($("#userInfo")[0], "xls", "ASHX/UploadMenu.ashx", "菜单上传");
     },
-    buildTopBar: function (name) {
+    buildTopBar: function (user) {
         $("#userInfo").empty();
+
+
+        if (user.url) {
+            var image = $('<img src="' + user.url + '64">').appendTo($("#userInfo"));
+        }
+
         var label = $("<label></label>");
-        label.html(name);
+        label.html(user.Account);
         $("#userInfo").append(label);
+
         main.buildRefreshButton();
         main.buildRefreshMenuButton();
 
         main.buildDownLoadMenuButton();
-        if (order.auth > 1) {
+        if (order.currentUser.auth > 1) {
             main.buildUploadButton();
         }
 
@@ -91,7 +97,7 @@ var main = {
             showfk: false,
             dataSource: data,
             rowInsertCallback: function (tr, row) {
-                if (order.auth > 1 || order.currentUser == row["Name"]) {
+                if (order.currentUser.auth > 1 || order.currentUser.Account == row["Name"]) {
                     var td = $('<td>删除</td>').appendTo(tr);
                     td.addClass("clickable");
                     td.click(function () {
@@ -104,7 +110,7 @@ var main = {
             cellInsertCallback: function (td, name, value, row) {
                 switch (name) {
                     case "Money":
-                        if (order.auth > 1) {
+                        if (order.currentUser.auth > 1) {
                             td.addClass("clickable");
                             td.click(function () {
                                 var temp = prompt("输入价格", row[name]);
@@ -121,7 +127,7 @@ var main = {
                         }
                         break;
                     case "Comment":
-                        if (order.auth > 1 || order.currentUser == row["Name"]) {
+                        if (order.currentUser.auth > 1 || order.currentUser.Account == row["Name"]) {
                             td.addClass("clickable");
                             td.click(function () {
                                 var temp = prompt("输入备注", row[name]);
@@ -137,7 +143,7 @@ var main = {
                         }
                         break;
                     case "Pay":
-                        if (order.auth > 1) {
+                        if (order.currentUser.auth > 1) {
                             td.addClass("clickable");
                             td.click(function () {
                                 var temp = prompt("输入付款", row[name]);
